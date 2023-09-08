@@ -4,14 +4,14 @@
             "name": "Akeno Himejima",
             "age": 17,
             "race": "mitad Humana y mitad Angel Caido / Convertida en demonio",
-                "img" : "https://static.wikia.nocookie.net/highschooldxd/images/4/44/Akeno_Himejima.png/revision/latest?cb=20141229171752&path-prefix=es"
+                "img" : "./img/akeno5.jpg"
     },
     {
         "id": 2,
             "name": "Rias Gremori",
             "age": 17,
             "race": "Demonio",
-              "img" : "https://github.com/Dunedain18/ChicasAnime/rias51.jpg"
+              "img" : "./img/rias51.jpg"
 
     }
 
