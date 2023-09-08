@@ -3,13 +3,15 @@
             "id": 1,
             "name": "Akeno Himejima",
             "age": 17,
-            "race": "mitad Humana y mitad Angel Caido / Convertida en demonio"
+            "race": "mitad Humana y mitad Angel Caido / Convertida en demonio",
+                "img" : "https://github.com/Dunedain18/ChicasAnime/akeno5.jpg"
     },
     {
         "id": 2,
             "name": "Rias Gremori",
             "age": 17,
-            "race": "Demonio"
+            "race": "Demonio",
+              "img" : "https://github.com/Dunedain18/ChicasAnime/rias51.jpg"
 
     }
 
