@@ -1,0 +1,18 @@
+{
+    "Chicas":[
+        {
+            "id": 1,
+            "name": "Akeno Himejima",
+            "age": 17,
+            "race": "mitad Humana y mitad Angel Caido / Convertida en demonio"
+    },
+    {
+        "id": 2,
+            "name": "Rias Gremori",
+            "age": 17,
+            "race": "Demonio"
+
+    }
+
+    ]
+}
