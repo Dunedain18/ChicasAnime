@@ -11,7 +11,7 @@
             "name": "Rias Gremori",
             "age": 17,
             "race": "Demonio",
-              "img" : "./img/rias51.jpg"
+              "img" : "../img/rias51.jpg"
 
     }
 
