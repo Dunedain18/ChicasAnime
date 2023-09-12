@@ -4,6 +4,7 @@
             "name": "Akeno Himejima",
             "age": 17,
             "race": "mitad Humana y mitad Angel Caido / Convertida en demonio",
+                "detalle" : "bella demonio",
                 "img" : "https://github.com/Dunedain18/ChicasAnime/blob/main/akeno5.jpg?raw=true"
     },
     {
@@ -11,6 +12,7 @@
             "name": "Rias Gremori",
             "age": 17,
             "race": "Demonio",
+            "detalle" : "bella demonio",
               "img" : "https://github.com/Dunedain18/ChicasAnime/blob/main/rias51.jpg?raw=true"
 
     }
