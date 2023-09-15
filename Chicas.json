@@ -1,6 +1,5 @@
 [
-{
-"id": 1, 
+{"id": 1, 
 "name": "Akeno Himejima", 
 "age": 17, 
 "birth date": "21 de Julio", 
@@ -15,10 +14,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/akeno5.jpg?raw=true", 
-"power": "" 
-},
-{
-"id": 2, 
+"power": "" },
+{"id": 2, 
 "name": "Akeno Himejima", 
 "age": 18, 
 "birth date": "22 de Julio", 
@@ -33,10 +30,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/akeno5.jpg?raw=true", 
-"power": "" 
-},
-{
-"id": 3, 
+"power": "" },
+{"id": 3, 
 "name": "Rias Gremori", 
 "age": 17, 
 "birth date": "09 de Marzo", 
@@ -69,10 +64,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/rias51.jpg?raw=true", 
-"power": "" 
-},
-{
-"id": 5, 
+"power": ""},
+{"id": 5, 
 "name": "Koneko Toujou", 
 "age": 15, 
 "birth date": "23 de Noviembre", 
@@ -87,6 +80,5 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "", 
-"power": "" 
-}
+"power": ""}
 ]
