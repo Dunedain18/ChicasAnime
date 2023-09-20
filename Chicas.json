@@ -1,8 +1,7 @@
-{
-"id": 1, 
-"name": "Akeno Himejima", 
-"age": 17, 
-"birth date": "21 de Julio", 
+{"id": 1,
+"name": "Akeno Himejima",
+"age": 17,
+"birth date": "21 de Julio",
 "race": "mitad Humana/ mitad Angel Caido / convertida a Demonio", 
 "hair Style": "Largo en cola de caballo", 
 "hair Color": "Negro", 
@@ -14,10 +13,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/akeno5.jpg?raw=true", 
-"power": ""
-},
-{
-"id": 2, 
+"power": ""},
+{"id": 2, 
 "name": "Akeno Himejima", 
 "age": 18, 
 "birth date": "22 de Julio", 
@@ -32,10 +29,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/Akeno_Himejima.jpg?raw=true", 
-"power": ""
-},
-{
-"id": 3, 
+"power": ""},
+{"id": 3,
 "name": "Rias Gremori", 
 "age": 17, 
 "birth date": "09 de Marzo", 
@@ -50,10 +45,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/rias51.jpg?raw=true", 
-"power": ""
-},
-{
-"id": 4, 
+"power": ""},
+{"id": 4, 
 "name": "Rias Gremori", 
 "age": 18, 
 "birth date": "10 de Marzo", 
@@ -68,10 +61,8 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/Rias_gremory.jpg?raw=true", 
-"power": ""
-},
-{
-"id": 5, 
+"power": ""},
+{"id": 5, 
 "name": "Koneko Toujou", 
 "age": 15, 
 "birth date": "23 de Noviembre", 
@@ -86,5 +77,4 @@
 "anime": "High School DxD", 
 "team": "Rias Gremori", 
 "img": "https://github.com/Dunedain18/ChicasAnime/blob/main/koneko3.jpg?raw=true", 
-"power": ""
-}
+"power": ""}
