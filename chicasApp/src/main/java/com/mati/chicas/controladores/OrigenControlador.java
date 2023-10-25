@@ -6,6 +6,7 @@
 package com.mati.chicas.controladores;
 
 import com.mati.chicas.Exeptions.MiExeption;
+import com.mati.chicas.entidades.Origen;
 import com.mati.chicas.enumeraciones.tipoOrigen;
 import com.mati.chicas.servicios.OrigenServicio;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,7 +62,30 @@ public class OrigenControlador {
     
     @GetMapping("/lista")
     public String listar(ModelMap modelo){
+        
+        List<Origen> origenes = origenServicio.listarOrigen();
+        
+        modelo.addAttribute("origenes", origenes);
+        
        return "origen_list.html";
+    }
+    
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, ModelMap modelo){
+        modelo.put("origen", origenServicio.getOne(id));
+        
+        return "autor_modificar.html";
+    }
+    
+    @PostMapping("/modificar/{id}")
+    public String modificar (@PathVariable String id, String nombre, tipoOrigen tipo, MultipartFile archivo, ModelMap modelo){
+        try {
+            origenServicio.modificarOrigen(id,nombre,tipo,archivo);
+            return "redirect:../lista";
+        } catch (MiExeption ex) {
+            modelo.put("error", ex.getMessage());
+            return "autor_modificar.html";
+        }
     }
 
 }

@@ -11,8 +11,12 @@ import com.mati.chicas.entidades.Origen;
 import com.mati.chicas.enumeraciones.tipoOrigen;
 import com.mati.chicas.repositorios.ImagenRepositorio;
 import com.mati.chicas.repositorios.OrigenRepositorio;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +48,39 @@ public class OrigenServicio {
         origen.setLogo(imagen);
         
         origenRepositorio.save(origen);
+    }
+    
+    public List<Origen> listarOrigen(){
+        List<Origen> origenes = new ArrayList();
+        
+        origenes = origenRepositorio.findAll();
+        
+        return origenes;
+    }
+    
+    @Transactional
+    public void modificarOrigen(String id, String nombre, tipoOrigen tipo,  MultipartFile archivo)throws MiExeption{
+         validar(nombre,tipo);
+        
+        Optional<Origen> respuesta = origenRepositorio.findById(id);
+        if(respuesta.isPresent()){
+        
+        Origen origen = respuesta.get();
+        
+        origen.setNombre(nombre);
+        origen.setTipo(tipo);
+        
+        String idImagen = null;
+        
+        if(origen.getLogo()!=null){
+            idImagen = origen.getLogo().getId();
+        }
+        
+        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+        origen.setLogo(imagen);
+        
+        origenRepositorio.save(origen);  
+        }
     }
     
      private void validar (String nombre, tipoOrigen tipo)throws MiExeption{
