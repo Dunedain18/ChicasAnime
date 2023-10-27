@@ -13,6 +13,9 @@ import com.mati.chicas.entidades.Origen;
 import com.mati.chicas.repositorios.ChicaRepositorio;
 import com.mati.chicas.repositorios.ColorRepositorio;
 import com.mati.chicas.repositorios.OrigenRepositorio;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,27 +36,27 @@ public class ChicaServicio {
 
     @Autowired
     private OrigenRepositorio origenRepositorio;
-    
+
     @Autowired
     private ImagenServicio imagenServicio;
 
     @Transactional
     public void crearChica(String nombre, int edad, Integer idColor, String peinado,
-             int altura, int peso, int busto, int cadera, int cintura, String copa,
-             String idOrigen, String descripcion, MultipartFile archivo) throws MiExeption {
+            int altura, int peso, int busto, int cadera, int cintura, String copa,
+            String idOrigen, String descripcion, MultipartFile archivo) throws MiExeption {
 
         validar(nombre, idColor, idOrigen);
-        
+
         Color color = colorRepositorio.findById(idColor).get();
-        
+
         Origen origen = origenRepositorio.findById(idOrigen).get();
-        
+
         Imagen imagen = imagenServicio.guardar(archivo);
-        
+
         Chica chica = new Chica();
-        
+
         chica.setNombre(nombre);
-        
+
         chica.setEdad(edad);
         chica.setColorDePelo(color);
         chica.setPeinado(peinado);
@@ -66,46 +69,88 @@ public class ChicaServicio {
         chica.setAnime(origen);
         chica.setImagen(imagen);
         chica.setDescripcion(descripcion);
-        
+
         chicaRepositorio.save(chica);
-        
+
     }
-    
-    
-    
-    private void validar (String nombre, Integer idColor, String idOrigen)throws MiExeption{
-        
-         if(nombre == null|| nombre.isEmpty()){
+
+    @Transactional
+    public void modificarChica(Integer id, String nombre, int edad, Integer idColor, String peinado,
+            int altura, int peso, int busto, int cadera, int cintura, String copa,
+            String idOrigen, String descripcion, MultipartFile archivo) throws MiExeption {
+
+        validar(nombre, idColor, idOrigen);
+
+        Optional<Chica> respuesta = chicaRepositorio.findById(id);
+
+        Optional<Color> respuestaColor = colorRepositorio.findById(idColor);
+
+        Optional<Origen> respuestaOrigen = origenRepositorio.findById(idOrigen);
+
+        Color color = new Color();
+
+        Origen origen = new Origen();
+
+        if (respuestaColor.isPresent()) {
+            color = respuestaColor.get();
+        }
+        if (respuestaOrigen.isPresent()) {
+            origen = respuestaOrigen.get();
+        }
+        if (respuesta.isPresent()) {
+            Chica chica = respuesta.get();
+
+            chica.setNombre(nombre);
+
+            chica.setEdad(edad);
+            chica.setColorDePelo(color);
+            chica.setPeinado(peinado);
+            chica.setAltura(altura);
+            chica.setPeso(peso);
+            chica.setBusto(busto);
+            chica.setCadera(cadera);
+            chica.setCintura(cintura);
+            chica.setCopa(copa);
+            chica.setAnime(origen);
+
+            String idImagen = null;
+
+            if (chica.getImagen() != null) {
+                idImagen = chica.getImagen().getId();
+            }
+
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            chica.setImagen(imagen);
+            chica.setDescripcion(descripcion);
+            chicaRepositorio.save(chica);
+        }
+
+    }
+
+    public List<Chica> listarChica() {
+
+        List<Chica> chicas = new ArrayList<>();
+        chicas = chicaRepositorio.findAll();
+        return chicas;
+    }
+
+    private void validar(String nombre, Integer idColor, String idOrigen) throws MiExeption {
+
+        if (nombre == null || nombre.isEmpty()) {
             throw new MiExeption("el nombre no puede ser nulo o estar vacio");
         }
-                    
-        if(idColor == null ){
+
+        if (idColor == null) {
             throw new MiExeption("el id del color no puede ser nulo o  estar vacio");
         }
-        
-        if(idOrigen == null || idOrigen.isEmpty()){
+
+        if (idOrigen == null || idOrigen.isEmpty()) {
             throw new MiExeption("el id del origen no puede ser nulo o  estar vacio");
         }
-                   
+
     }
-    
-    public Chica getOne(Integer id){
+
+    public Chica getOne(Integer id) {
         return chicaRepositorio.getOne(id);
     }
 }
-/*  ;
-    private ;
-    @ManyToOne
-    private Color colorDePelo;
-    private ;
-    private ;
-    private int peso;
-    private int busto;
-    private int cadera;
-    private int cintura;
-    private String copa;
-    @ManyToOne
-    private Origen anime;
-    @OneToOne
-    private Imagen imagen;
-    private String descripcion;*/
