@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -23,8 +24,9 @@ import lombok.Data;
 public class Chica {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+   @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
     private String nombre;
     private int edad;
     @ManyToOne
@@ -36,10 +38,13 @@ public class Chica {
     private int cadera;
     private int cintura;
     private String copa;
+    
     @ManyToOne
     private Origen anime;
+    
     @OneToOne
     private Imagen imagen;
+    
     private String descripcion;
 
 }

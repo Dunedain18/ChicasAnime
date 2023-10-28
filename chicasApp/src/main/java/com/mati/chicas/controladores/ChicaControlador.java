@@ -46,7 +46,7 @@ public class ChicaControlador {
 
         List<Color> colores = colorServicio.listarColor();
         List<Origen> origenes = origenServicio.listarOrigen();
-        
+
         modelo.addAttribute("colores", colores);
         modelo.addAttribute("origenes", origenes);
 
@@ -54,15 +54,22 @@ public class ChicaControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, int edad, Integer idColor, String peinado,
-            int altura, int peso, int busto, int cadera, int cintura, String copa,
-            String idOrigen, String descripcion, MultipartFile archivo, ModelMap modelo) {
+    public String registro(@RequestParam String nombre, @RequestParam(required = false) int edad, @RequestParam String idColor,
+            @RequestParam(required = false) String peinado, @RequestParam(required = false) int altura,
+            @RequestParam(required = false) int peso, @RequestParam(required = false) int busto, @RequestParam(required = false) int cadera,
+            @RequestParam(required = false) int cintura, @RequestParam(required = false) String copa,
+            @RequestParam String idOrigen, @RequestParam(required = false) String descripcion, @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) {
 
         try {
             chicaServicio.crearChica(nombre, edad, idColor, peinado, altura, peso, busto, cadera, cintura, copa, idOrigen, descripcion, archivo);
 
             modelo.put("exito", "la chica fue cargada correctamente");
         } catch (MiExeption ex) {
+            List<Color> colores = colorServicio.listarColor();
+            List<Origen> origenes = origenServicio.listarOrigen();
+
+            modelo.addAttribute("colores", colores);
+            modelo.addAttribute("origenes", origenes);
 
             modelo.put("error", ex.getMessage());
             return "chica_form.html";
@@ -74,23 +81,22 @@ public class ChicaControlador {
     @GetMapping("/lista")
     public String listar(ModelMap modelo) {
 
-              List<Chica> chicas = chicaServicio.listarChica();
-        
-        
+        List<Chica> chicas = chicaServicio.listarChica();
+
         modelo.addAttribute("chicas", chicas);
 
         return "chica_list.html";
     }
 
     @GetMapping("/modificar/{id}")
-    public String modificar(@PathVariable Integer id, ModelMap modelo) {
+    public String modificar(@PathVariable String id, ModelMap modelo) {
         modelo.put("chica", chicaServicio.getOne(id));
 
         return "chica_modificar.html";
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable Integer id, String nombre, int edad, Integer idColor, String peinado,
+    public String modificar(@PathVariable String id, String nombre, int edad, String idColor, String peinado,
             int altura, int peso, int busto, int cadera, int cintura, String copa,
             String idOrigen, String descripcion, MultipartFile archivo, ModelMap modelo) {
         try {

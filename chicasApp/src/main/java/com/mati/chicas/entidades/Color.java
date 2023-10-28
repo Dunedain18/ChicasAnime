@@ -20,7 +20,7 @@ import lombok.Data;
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
     private String nombre;
     private String codigoHex;
     private String codigoRGB;

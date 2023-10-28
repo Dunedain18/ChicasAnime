@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author matob
  */
-public interface ColorRepositorio extends JpaRepository<Color, Integer>{
+public interface ColorRepositorio extends JpaRepository<Color, String>{
     
 }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author matob
  */
 @Repository
-public interface ChicaRepositorio extends JpaRepository<Chica, Integer>{
+public interface ChicaRepositorio extends JpaRepository<Chica, String>{
     @Query ("SELECT u FROM Chica u WHERE u.nombre = :nombre")
     public Chica buscarPorNombre(@Param("nombre") String nombre);
 }

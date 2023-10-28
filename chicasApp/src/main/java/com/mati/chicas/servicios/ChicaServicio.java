@@ -41,7 +41,7 @@ public class ChicaServicio {
     private ImagenServicio imagenServicio;
 
     @Transactional
-    public void crearChica(String nombre, int edad, Integer idColor, String peinado,
+    public void crearChica(String nombre, int edad, String idColor, String peinado,
             int altura, int peso, int busto, int cadera, int cintura, String copa,
             String idOrigen, String descripcion, MultipartFile archivo) throws MiExeption {
 
@@ -75,9 +75,11 @@ public class ChicaServicio {
     }
 
     @Transactional
-    public void modificarChica(Integer id, String nombre, int edad, Integer idColor, String peinado,
+    public void modificarChica(String id, String nombre, int edad, String idColor, String peinado,
             int altura, int peso, int busto, int cadera, int cintura, String copa,
             String idOrigen, String descripcion, MultipartFile archivo) throws MiExeption {
+        
+        
 
         validar(nombre, idColor, idOrigen);
 
@@ -134,23 +136,23 @@ public class ChicaServicio {
         return chicas;
     }
 
-    private void validar(String nombre, Integer idColor, String idOrigen) throws MiExeption {
+    private void validar(String nombre, String idColor, String idOrigen) throws MiExeption {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new MiExeption("el nombre no puede ser nulo o estar vacio");
         }
 
-        if (idColor == null) {
-            throw new MiExeption("el id del color no puede ser nulo o  estar vacio");
+        if (idColor == null || idColor.isEmpty()) {
+            throw new MiExeption("el id del color no puede ser nulo o  estar vacio" + idColor);
         }
 
         if (idOrigen == null || idOrigen.isEmpty()) {
-            throw new MiExeption("el id del origen no puede ser nulo o  estar vacio");
+            throw new MiExeption("el id del origen no puede ser nulo o  estar vacio" + idOrigen);
         }
 
     }
 
-    public Chica getOne(Integer id) {
+    public Chica getOne(String id) {
         return chicaRepositorio.getOne(id);
     }
 }

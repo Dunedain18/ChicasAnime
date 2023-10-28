@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec ="http//www.thymeleaf.org/extras/spring-security" lang="en">
+    <head th:replace ="/fragments/head :: head"> </head>
+    <body>
+        <nav th:replace = "/fragments/Barra :: nav"></nav>
+        <div class="container m-5">
+
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tipo de Origen</th>
+                        <th scope="col">Logo</th>
+                        <th scope="col">Modificar</th>
+                    </tr>
+                </thead>
+                <tbody th:each = "chica : ${chicas}">
+                    <tr>
+                        <th scope="row" th:text = "${chica.id}"></th>
+                        <td th:text = "${chica.nombre}"></td>
+                        <td th:text = "${chica.anime.nombre}"></td>
+                        <td>
+                            <a><img th:if="${chica.imagen != null}" class="icon" th:src="@{/imagen/chica/__${chica.id}__}"></a>
+                        </td>
+                       
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <script th:replace ="/fragments/script :: script"></script>
+    </body>
+</html>
+
