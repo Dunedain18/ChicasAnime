@@ -11,11 +11,56 @@ and open the template in the editor.
     <body>
         <nav th:replace = "/fragments/Barra :: nav"></nav>
         <div>
-            
-            
-            
-        </div>
+   <!--  <div class="container" style="padding: 5px">
+    Bootstrap's grid system is built with flexbox and allows up to 12 columns across the page. A grid row is divided into 12 parts. -->
 
+    <!-- The grid system is responsive, and the columns will re-arrange automatically depending on the screen size.
+
+    Make sure that the sum adds up to 12 or fewer. -->
+
+    <!-- The Bootstrap 4 grid system has five classes: -->
+
+    <!-- .col- (extra small devices - screen width less than 576px)
+
+        .col-sm- (small devices - screen width equal to or greater than 576px)
+
+        .col-md- (medium devices - screen width equal to or greater than 768px)
+
+        .col-lg- (large devices - screen width equal to or greater than 992px)
+
+        .col-xl- (xlarge devices - screen width equal to or greater than 1200px)
+
+        The classes above can be combined to create more dynamic and flexible layouts. -->
+
+    <div class="blog-card" th:each="chica : ${chicas}">
+      
+        <div class="container">
+            <a
+        th:href="@{/chica/detalle/{id}(id=${chica.id})}"
+      >
+          <img
+            class="photo"
+            th:src="@{/imagen/chica/__${chica.id}__}"
+          ></img>
+          
+         <!-- <ul class="details">
+            <li class="author"><a href="#">Autor</a></li>
+            <li class="date">Aug. 24, 2015</li> th:style="'background-image:url(' + @{/images/R1.jpg} + ');'"
+            <li class="tags">
+              <ul>
+                <li><a href="#">Etiquetas</a></li>
+              </ul>
+            </li>
+          </ul> -->
+        <div class="description">
+          <h1 th:text="${chica.Nombre}"></h1>
+          <h2 th:text="${chica.raza}" ></h2>
+          <p th:text="${chica.anime.nombre}"></p>
+          <p class="read-more"></p>
+        </div>
+      </a>
+    </div>
+    </div>
         <script th:replace ="/fragments/script :: script"></script>
     </body>
 </html>

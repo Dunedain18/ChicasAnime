@@ -24,11 +24,17 @@ import org.hibernate.annotations.GenericGenerator;
 public class Chica {
 
     @Id
-   @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nombre;
     private int edad;
+    private String raza;
+    @ManyToOne
+    private Color colorDeOjos;
+    private String tipoDeOjos;
+    private String cumpleaños;
+    private String poder;
     @ManyToOne
     private Color colorDePelo;
     private String peinado;
@@ -38,13 +44,13 @@ public class Chica {
     private int cadera;
     private int cintura;
     private String copa;
-    
+
     @ManyToOne
     private Origen anime;
-    
+
     @OneToOne
     private Imagen imagen;
-    
+
     private String descripcion;
 
 }

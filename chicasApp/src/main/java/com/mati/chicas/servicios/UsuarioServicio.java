@@ -72,22 +72,22 @@ public class UsuarioServicio implements UserDetailsService{
         
         Usuario usuario = respuesta.get();
         
+        
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         
-        
-        
+     
         String idImagen = null;
         
         if(usuario.getImagen() !=null){
             idImagen = usuario.getImagen().getId();
         }
-        
         Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+       
         usuario.setImagen(imagen);
-        
+  
         usuarioRepositorio.save(usuario);  
         }
     }

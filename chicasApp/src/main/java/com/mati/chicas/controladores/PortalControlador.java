@@ -6,8 +6,11 @@
 package com.mati.chicas.controladores;
 
 import com.mati.chicas.Exeptions.MiExeption;
+import com.mati.chicas.entidades.Chica;
 import com.mati.chicas.entidades.Usuario;
+import com.mati.chicas.servicios.ChicaServicio;
 import com.mati.chicas.servicios.UsuarioServicio;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,9 +34,14 @@ public class PortalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/")
-    public String index() {
+    @Autowired
+    private ChicaServicio chicaServicio;
 
+    @GetMapping("/")
+    public String index(ModelMap modelo) {
+        List<Chica> chicas = chicaServicio.listarChica();
+
+        modelo.addAttribute("chicas", chicas);
         return "index.html";
     }
 
@@ -87,14 +95,16 @@ public class PortalControlador {
     public String perfil(ModelMap modelo, HttpSession session) {
 
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("imagen", usuario.getImagen());
         modelo.put("usuario", usuario);
+        modelo.put("nombre", usuario.getNombre());
         return "usuario_modificar.html";
 
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PostMapping("/perfil/{id}")
-    
+
     public String actualizar(MultipartFile archivo, @PathVariable String id, @RequestParam String nombre, @RequestParam String email,
             @RequestParam String password, String password2, ModelMap modelo) {
 
@@ -119,6 +129,7 @@ public class PortalControlador {
 
         return "usuario_modificar.html";
     }
+
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @PostMapping("/usuario/modificar/{id}")
     public String modificar(MultipartFile archivo, @PathVariable String id, @RequestParam String nombre, @RequestParam String email,
@@ -138,4 +149,3 @@ public class PortalControlador {
 
     }
 }
-

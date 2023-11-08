@@ -8,6 +8,7 @@ package com.mati.chicas.servicios;
 import com.mati.chicas.entidades.Color;
 import com.mati.chicas.repositorios.ColorRepositorio;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,14 @@ public class ColorServicio {
         
         List<Color> colores = new ArrayList<>();
         colores = colorRepositorio.findAll();
+        colores.sort(compararNombre);
         return colores;
     }
     
+    public static Comparator<Color> compararNombre = new Comparator<Color>(){
+       @Override
+       public int compare(Color c1, Color c2){
+           return c1.getNombre().compareTo(c2.getNombre());
+       }
+    };
 }

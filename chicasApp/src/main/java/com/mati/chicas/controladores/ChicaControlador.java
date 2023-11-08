@@ -13,9 +13,11 @@ import com.mati.chicas.enumeraciones.tipoOrigen;
 import com.mati.chicas.servicios.ChicaServicio;
 import com.mati.chicas.servicios.ColorServicio;
 import com.mati.chicas.servicios.OrigenServicio;
+import java.util.Base64;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,23 +47,27 @@ public class ChicaControlador {
     public String registrar(ModelMap modelo) {
 
         List<Color> colores = colorServicio.listarColor();
+        List<Color> colorOjos = colorServicio.listarColor();
         List<Origen> origenes = origenServicio.listarOrigen();
 
         modelo.addAttribute("colores", colores);
+        modelo.addAttribute("colorOjos", colorOjos);
         modelo.addAttribute("origenes", origenes);
 
         return "chica_form.html";
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, @RequestParam(required = false) int edad, @RequestParam String idColor,
+    public String registro(@RequestParam String nombre, @RequestParam(required = false) int edad,@RequestParam(required = false) String cumple,
+            @RequestParam(required = false) String raza,@RequestParam(required = false) String tipoOjo,@RequestParam String idColorOjo, @RequestParam String idColor,
             @RequestParam(required = false) String peinado, @RequestParam(required = false) int altura,
             @RequestParam(required = false) int peso, @RequestParam(required = false) int busto, @RequestParam(required = false) int cadera,
             @RequestParam(required = false) int cintura, @RequestParam(required = false) String copa,
-            @RequestParam String idOrigen, @RequestParam(required = false) String descripcion, @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) {
+            @RequestParam String idOrigen, @RequestParam(required = false) String descripcion,@RequestParam(required = false) String poder,
+            @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) {
 
         try {
-            chicaServicio.crearChica(nombre, edad, idColor, peinado, altura, peso, busto, cadera, cintura, copa, idOrigen, descripcion, archivo);
+            chicaServicio.crearChica(nombre, edad,cumple,raza,idColorOjo,tipoOjo, idColor, peinado, altura, peso, busto, cadera, cintura, copa, idOrigen, descripcion, archivo);
 
             modelo.put("exito", "la chica fue cargada correctamente");
         } catch (MiExeption ex) {
@@ -108,4 +114,24 @@ public class ChicaControlador {
         }
     }
 
+     @GetMapping("/detalle/{id}")
+    public String detalleChica(@PathVariable String id, Model model) {
+        Chica chica = chicaServicio.getOne(id);
+
+        if (chica != null) {
+            // Realiza la conversión de la imagen a base64
+            byte[] imagenContenido = chica.getImagen().getContenido();
+            String imagenBase64 = Base64.getEncoder().encodeToString(imagenContenido);
+
+//             Agrega la imagen base64 al modelo
+            model.addAttribute("imagenBase64", imagenBase64);
+            // Agrega el chica al modelo
+            model.addAttribute("chica", chica);
+
+            return "chica_detalle";
+        } else {
+            // Manejar el caso en el que no se encuentra el chica
+            return "error"; // Puedes crear una vista específica para errores.
+        }
+    }
 }

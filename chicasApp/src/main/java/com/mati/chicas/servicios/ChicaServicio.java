@@ -41,13 +41,15 @@ public class ChicaServicio {
     private ImagenServicio imagenServicio;
 
     @Transactional
-    public void crearChica(String nombre, int edad, String idColor, String peinado,
+    public void crearChica(String nombre, int edad,String cumple,String raza, String idColorOjo,String tipoOjo, String idColor, String peinado,
             int altura, int peso, int busto, int cadera, int cintura, String copa,
             String idOrigen, String descripcion, MultipartFile archivo) throws MiExeption {
 
         validar(nombre, idColor, idOrigen);
 
         Color color = colorRepositorio.findById(idColor).get();
+        
+        Color colorOjo = colorRepositorio.findById(idColorOjo).get();
 
         Origen origen = origenRepositorio.findById(idOrigen).get();
 
@@ -58,6 +60,8 @@ public class ChicaServicio {
         chica.setNombre(nombre);
 
         chica.setEdad(edad);
+        chica.setRaza(raza);
+        chica.setColorDeOjos(colorOjo);
         chica.setColorDePelo(color);
         chica.setPeinado(peinado);
         chica.setAltura(altura);
@@ -122,7 +126,8 @@ public class ChicaServicio {
             }
 
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-            chica.setImagen(imagen);
+            if(imagen != null){
+            chica.setImagen(imagen);}
             chica.setDescripcion(descripcion);
             chicaRepositorio.save(chica);
         }
